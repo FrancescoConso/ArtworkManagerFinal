@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ArtworkManager.Models.Artwork>
+
+@{
+    ViewData["Title"] = "Artworks";
+}
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject RoleManager<IdentityRole> RoleManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Artworks</h1>
+
+    <a asp-action="NewArtwork">Aggiungi Artwork</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Anteprima
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titolo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Artista)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Periodo)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+                if (item.DaRimuovere == false)
+                {
+                    <tr>
+                        <th>
+                            <img src="~/artworks/@item.Immagine"
+                                 width="100"
+                                 asp-append-version="true" />
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Titolo)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Artista)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Stile)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Periodo)
+                        </th>
+                        <td>
+                            <a asp-action="EditArtwork" asp-route-id="@item.Id">Modifica</a>
+                            <br />  <a asp-action="DetailsArtwork" asp-route-id="@item.Id">Dettagli</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <br /> <a action="post" asp-action="DeleteArtwork" asp-route-id="@item.Id">Rimuovi</a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>Artworks</h1>
+    <p><a asp-controller="Users" asp-action="Register">Registrati</a> o <a asp-controller="Users" asp-action="Login">effettua il Login</a> per visualizzare gli Artworks.</p>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

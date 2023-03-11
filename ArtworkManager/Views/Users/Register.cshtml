@@ -1,0 +1,46 @@
+﻿@model ArtworkManager.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Registrazione";
+}
+
+<h1>Registra Utente</h1>
+<hr />
+<div class="row">
+    <form method="post" asp-action="RegisterUser">
+        <h4>Registra un utente.</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ruolo"></label>
+            <select asp-for="Ruolo" class="form-control">
+                <option value="Admin">Admin</option>
+                <option value="Supervisor">Supervisor</option>
+            </select>
+            <span asp-validation-for="Ruolo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Registra</button>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

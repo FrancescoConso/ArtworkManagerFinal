@@ -1,0 +1,55 @@
+﻿@model ArtworkManager.Models.Artwork
+@{
+    ViewData["Title"] = "Modifica Artwork";
+}
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Modifica Artwork</h1>
+    <hr />
+    <div class="row">
+        <form method="post" enctype="multipart/form-data" asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Titolo" class="control-label"></label>
+                <input asp-for="Titolo" class="form-control" />
+                <span asp-validation-for="Titolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Immagine" class="control-label"></label>
+                <input type="file" asp-for="Immagine" class="form-control" />
+                <span asp-validation-for="Immagine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artista" class="control-label"></label>
+                <input asp-for="Artista" class="form-control" />
+                <span asp-validation-for="Artista" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stile" class="control-label"></label>
+                <input asp-for="Stile" class="form-control" />
+                <span asp-validation-for="Stile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Periodo" class="control-label"></label>
+                <input asp-for="Periodo" class="form-control" />
+                <span asp-validation-for="Periodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <h1>Artworks</h1>
+    <p><a asp-controller="Users" asp-action="Register">Registrati</a> o <a asp-controller="Users" asp-action="Login">effettua il Login</a> per visualizzare gli Artworks.</p>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+@inject SignInManager<IdentityUser> SignInManager
+
+<div class="text-center">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h1>Benvenuto @User.Identity.Name</h1>
+        <a class="nav-link" asp-controller="Artworks" asp-action="Index">Accedi agli Artworks</a>
+    }
+    else
+    {
+        <h1>Benvenuto</h1>
+        <p><a asp-controller="Users" asp-action="Register">Registrati</a> o <a asp-controller="Users" asp-action="Login">effettua il Login.</a></p>
+    }
+
+</div>

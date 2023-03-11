@@ -1,0 +1,31 @@
+﻿@model ArtworkManager.Models.Artwork
+@{
+    ViewData["Title"] = "Rimuovi Artwork";
+}
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Rimuovi Artwork</h1>
+    <hr />
+    <div>
+        <form method="post" asp-action="Delete">
+            <div><h4>Sei sicuro di voler rimuovere l'artwork?</h4></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Rimuovi" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="Index">Indietro </a>
+        </div>
+    </div>
+}
+else
+{
+    <h1>Artworks</h1>
+    <p><a asp-controller="Users" asp-action="Register">Registrati</a> o <a asp-controller="Users" asp-action="Login">effettua il Login</a> per visualizzare gli Artworks.</p>
+}
+

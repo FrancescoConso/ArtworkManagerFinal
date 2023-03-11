@@ -1,0 +1,62 @@
+﻿@model ArtworkManager.Models.Artwork
+
+@{
+    ViewData["Title"] = "Dettaglio Artwork";
+}
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Dettaglio Artwork</h1>
+    <hr />
+    <div>
+        <h4>@Html.DisplayFor(model => model.Titolo)</h4>
+        <hr />
+        <dl>
+            <dd>
+                <img src="~/artworks/@Html.DisplayFor(model => model.Immagine)" />
+            </dd>
+            <dt>
+
+                @Html.DisplayNameFor(model => model.Titolo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Titolo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Artista)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Artista)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Stile)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Stile)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Periodo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Periodo)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="EditArtwork" asp-route-id="@Model.Id">Modifica Dettagli</a>
+        <br />
+        <a asp-action="Index">Torna Indietro</a>
+    </div>
+}
+else
+{
+    <h1>Artworks</h1>
+    <p><a asp-controller="Users" asp-action="Register">Registrati</a> o <a asp-controller="Users" asp-action="Login">effettua il Login</a> per visualizzare gli Artworks.</p>
+}
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
